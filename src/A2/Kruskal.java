@@ -6,6 +6,7 @@ public class Kruskal{
     public static WGraph kruskal(WGraph g){
 
         /* Fill this method (The statement return null is here only to compile) */
+        DisjointSets components = new DisjointSets(g.getNbNodes());
         
         return null;
     }
