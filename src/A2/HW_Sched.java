@@ -27,9 +27,9 @@ class Assignment implements Comparator<Assignment> {
 		// YOUR CODE GOES HERE, DONT FORGET TO EDIT THE RETURN STATEMENT
 		if (a1.deadline == a2.deadline) {
 			if (a1.weight > a2.weight) {
-				return 1;
+				return - 1;
 			} else if (a1.weight < a2.weight) {
-				return -1;
+				return 1;
 			} else {
 				return 0;
 			}
@@ -73,18 +73,37 @@ public class HW_Sched {
 
 		// Initializes the homeworkPlan, which you must fill out and output
 		int[] homeworkPlan = new int[Assignments.size()];
-
+		int counter = 0;
 		for (int i = 0; i < Assignments.size(); i++) {
 
 			Assignment A1 = Assignments.get(i);
 
-			if (i == Assignments.size() - 1) {
-				homeworkPlan[A1.number] = A1.deadline;
-			} else {
-				Assignment A2 = Assignments.get(i + 1);
-				if (A2.deadline != A1.deadline) {
+			if (i == 0) {
+				counter++;
+				homeworkPlan[A1.number] = counter;
+			} else if (i < Assignments.size()-1){
 
-					homeworkPlan[A1.number] = A1.deadline;
+			
+					Assignment A2 = Assignments.get(i + 1);
+					if (A2.deadline == A1.deadline){
+						if (counter >= A2.deadline){
+							
+							homeworkPlan[A2.number] = 0; 
+						}else {
+							counter++;
+							homeworkPlan[A1.number] = counter;
+						}
+					}
+					if (A2.deadline != A1.deadline) {
+						counter++;
+						homeworkPlan[A2.number] = counter;
+					}
+					
+				}
+			else {
+				if (counter < A1.deadline){
+					counter++;
+					homeworkPlan[A1.number] = counter;
 				}
 			}
 		}
