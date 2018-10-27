@@ -25,9 +25,9 @@ class Assignment implements Comparator<Assignment> {
 	@Override
 	public int compare(Assignment a1, Assignment a2) {
 		// YOUR CODE GOES HERE, DONT FORGET TO EDIT THE RETURN STATEMENT
-		if (a1.deadline == a2.deadline) {
+		if (a1.deadline == a2.deadline) { // ordering the 
 			if (a1.weight > a2.weight) {
-				return - 1;
+				return -1;
 			} else if (a1.weight < a2.weight) {
 				return 1;
 			} else {
@@ -76,32 +76,25 @@ public class HW_Sched {
 		int counter = 0;
 		for (int i = 0; i < Assignments.size(); i++) {
 
-			Assignment A1 = Assignments.get(i);
+			Assignment A1 = Assignments.get(i); // get the current assignment
 
-			if (i == 0) {
+			if (i == 0) { // if this is the first assignment then we add it directly to the homework plan and increment the counter
 				counter++;
 				homeworkPlan[A1.number] = counter;
-			} else if (i < Assignments.size()-1){
+			} else if (i < Assignments.size() - 1) { // if it's not the first assignment then we check the next assignment
 
-			
-					Assignment A2 = Assignments.get(i + 1);
-					if (A2.deadline == A1.deadline){
-						if (counter >= A2.deadline){
-							
-							homeworkPlan[A2.number] = 0; 
-						}else {
-							counter++;
-							homeworkPlan[A1.number] = counter;
-						}
-					}
-					if (A2.deadline != A1.deadline) {
+				Assignment A2 = Assignments.get(i + 1);
+				if (A2.deadline == A1.deadline && counter < A2.deadline) { // if the next assignment has the same deadline and is less than the counter we add it to the plan 
 						counter++;
-						homeworkPlan[A2.number] = counter;
+						homeworkPlan[A1.number] = counter;
 					}
-					
+				if (A2.deadline != A1.deadline) {// if they are not the same deadline  then we add the second assignment to the plan 
+					counter++;
+					homeworkPlan[A2.number] = counter;
 				}
-			else {
-				if (counter < A1.deadline){
+
+			} else {
+				if (counter < A1.deadline) {// finally if its the last assignment we check if the counter is less than the deadline  then we add it to the homework plan 
 					counter++;
 					homeworkPlan[A1.number] = counter;
 				}
