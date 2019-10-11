@@ -79,27 +79,27 @@ public class HW_Sched {
 		int counter = 0;
 		for (int i = 0; i < Assignments.size(); i++) {
 
-			Assignment A1 = Assignments.get(i); // get the current assignment
+			Assignment Assignment1 = Assignments.get(i); // get the current assignment
 
 			if (i == 0) { // if this is the first assignment then we add it directly to the homework plan and increment the counter
 				counter++;
-				homeworkPlan[A1.number] = counter;
+				homeworkPlan[Assignment1.number] = counter;
 			} else if (i < Assignments.size() - 1) { // if it's not the first assignment then we check the next assignment
 
-				Assignment A2 = Assignments.get(i + 1);
-				if (A2.deadline == A1.deadline && counter < A2.deadline) { // if the next assignment has the same deadline and is less than the counter we add it to the plan 
+				Assignment Assignment2 = Assignments.get(i + 1);
+				if (Assignment2.deadline == Assignment1.deadline && counter < Assignment2.deadline) { // if the next assignment has the same deadline and is less than the counter we add it to the plan 
 						counter++;
-						homeworkPlan[A1.number] = counter;
+						homeworkPlan[Assignment1.number] = counter;
 					}
-				if (A2.deadline != A1.deadline) {// if they are not the same deadline  then we add the second assignment to the plan 
+				if (Assignment2.deadline != Assignment1.deadline) {// if they are not the same deadline  then we add the second assignment to the plan 
 					counter++;
-					homeworkPlan[A2.number] = counter;
+					homeworkPlan[Assignment2.number] = counter;
 				}
 
 			} else {
-				if (counter < A1.deadline) {// finally if its the last assignment we check if the counter is less than the deadline  then we add it to the homework plan 
+				if (counter < Assignment1.deadline) {// finally if its the last assignment we check if the counter is less than the deadline  then we add it to the homework plan 
 					counter++;
-					homeworkPlan[A1.number] = counter;
+					homeworkPlan[Assignment1.number] = counter;
 				}
 			}
 		}
